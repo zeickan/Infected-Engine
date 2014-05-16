@@ -1,0 +1,153 @@
+{% load staticfiles %}<!doctype html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{% block title %}Red Carpet{% endblock %}</title>
+	
+	<link href='http://fonts.googleapis.com/css?family=Nobile:400,700' rel='stylesheet' type='text/css'>
+	
+    <link rel="stylesheet" href="{% static "css/normalize.css" %}" />
+    <link rel="stylesheet" href="{% static "css/docs.css" %}" />
+    <script src="{% static "js/custom.modernizr.js" %}"></script>
+
+    <link rel="stylesheet" href="{% static "css/font-awesome.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <link rel="stylesheet" href="{% static "fonts/stylesheet.css" %}">
+
+    <link rel="stylesheet" href="{% static "css/print.css" %}" media="print">
+		
+
+</head>
+{% load i18n %}
+<body class="{% block indexClass%}{% endblock%}antialiased off-canvas hide-extras">
+
+
+<!-- Navigation -->
+<div class="top-nav">
+<nav class="top-bar row">
+    <div class="large-12 columns">
+
+    <ul class="title-area">
+      <li class="name">
+        <h1>
+          <a href="{{ BASE_URL }}/" class="logo">
+            <img src="{% static "img/logo.png" %}">
+          </a>
+        </h1>
+      </li>
+      <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+    </ul>
+
+    <div class="search">
+        <form action="/store/search/" method="get" enctype="application/x-www-form-urlencoded">
+            <input name="q" type="text">
+        </form>
+    </div>
+
+    <section class="top-bar-section">
+
+      <ul class="right">
+
+        <li><a href="{{ BASE_URL }}/store/esmaltado-permanente-led/">ESMALTADO PERMANENTE LED</a></li>
+            <li class="divider">&bull;</li>
+        <li><a href="{{ BASE_URL }}/store/starter-kit/">STARTER KIT</a></li>
+            <li class="divider">&bull;</li>
+        <li><a href="{{ BASE_URL }}/store/pro-kit/">PRO KIT</a></li>
+            <li class="divider">&bull;</li>
+        <li><a href="{{ BASE_URL }}/store/nail-art-kits/">NAIL ART KITS</a></li>
+            <li class="divider">&bull;</li>
+        <li><a href="{{ BASE_URL }}/store/accesorios/">ACCESORIOS</a></li>
+
+
+
+
+            <li class="divider">&bull;</li>
+
+        <li class="has-dropdown">
+          <a href="#">CÓMO APLICAR</a>
+          <ul class="dropdown">
+            <li><a href="{{ BASEURL }}/seccion/howto/">Aplicación</a></li>
+            <li><a href="{{ BASEURL }}/seccion/videos/">Videos</a></li>
+            <li><a href="{{ BASEURL }}/seccion/faq/">Preguntas frecuentes</a></li>
+
+          </ul>
+        </li>
+
+         <li class="divider">&bull;</li>
+
+        {% if user %}<li><a href="{{ BASE_URL }}/accounts/profile/">USUARIO</a></li>{% endif %}
+
+
+
+      </ul>
+    </section>
+
+    </div>
+</nav>
+</div>
+<!-- End Top Bar -->
+
+<!-- End Navigation -->
+
+
+<div class="whiteBlock">
+{% block content %}{% endblock %}
+</div>
+
+
+<div class="footer {% block indexFoot %}{% endblock %}">
+    {% block footIndex %}{% endblock %}
+        <footer class="row">
+
+
+
+            <div class="large-5 small-12 columns">
+                <p>Copyright&copy; 2013 <a href="http://www.besign.com.mx" target="_blank">Besign</a> All Rights Reserved </p>
+            </div>
+
+            <div class="large-4 small-7 columns">
+                <p>
+                    <a href="{{ BASEURL }}/static/file/AvisoPrivacidad.pdf" target="_blank">Aviso de privacidad </a>
+                    &bull;
+                    <a href="{{ BASEURL }}/seccion/faq/">FAQ</a>
+                </p>
+            </div>
+
+            <div class="large-1 show-for-large-up columns">
+                <p>Follow us </p>
+            </div>
+
+            <div class="large-2 small-5 columns">
+                <ul class="socialnetwork">
+                    <li><a href="https://twitter.com/RedCarpet_Mx" target="_blank" class="twitter"><img src="{% static "img/twitter.png" %}"></a></li>
+                    <li><a href="https://www.facebook.com/redcarpetmanicuremexico?fref=ts" target="_blank" class="facebook"><img src="{% static "img/facebook.png" %}"></a></li>
+                    <li><a href="http://www.instagram.com/redcarpetmanicuremx/" target="_blank" class="instagram"><img src="{% static "img/instagram.png" %}"></a></li>
+                    <li><a href="http://www.pinterest.com/redcarpetmx/" target="_blank" class="pinterest"><img src="{% static "img/pinterest.png" %}"></a></li>
+                </ul>
+            </div>
+
+
+
+        </footer>
+    {% block indexDiv %}{% endblock %}
+</div>
+
+
+
+
+<script>
+
+	document.write('<script src="{{ BASE_URL }}/static/js/vendor/'
+	  + ('__proto__' in {} ? 'zepto' : 'jquery')
+	  + '.js"><\/script>');
+	
+	var jsonPath = "{{ BASE_URL }}/api/";
+</script>
+<script src="{% static "js/docs.js" %}"></script>
+<script src="{% static "js/script.js" %}"></script>
+{% block debug %}{% endblock %}
+</body>
+</html>

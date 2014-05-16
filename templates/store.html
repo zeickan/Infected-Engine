@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Red Carpet : Productos{% endblock %}
+{% block content %}
+
+<div class="seccion">
+    <div class="row ">
+        <div class="large-12 columns">
+
+            <h1>{{ current }}</h1>
+
+        </div>
+    </div>
+</div>
+
+<div class="row contenido">
+    <div class="large-12 columns">
+
+
+
+        <ul class="breadcrumbs">
+          <li><a href="{{ BASE_URL }}">Inicio</a></li>
+          <li><a href="{{ BASE_URL }}/store/">Tienda</a></li>
+          {% if actual %}<li class="current"><a href="#">{{actual}}</a></li>{% endif %}
+        </ul>
+
+      <div class="row">
+        
+        
+
+  <!-- Side Bar -->
+
+        <div class="large-4 columns">
+
+            <div class="sidebar">
+                <p>
+                    Productos en el carrito: <span id="current_basket">{{current_basket}}</span>
+                </p>
+
+                <p>
+                    <a href="{{ BASE_URL }}/store/checkout/" class="niceButton left medium">Pagar</a>
+                    <div class="clear"></div>
+                </p>
+
+                
+
+            </div>
+
+            <div class="hide-for-small">
+                <div class="colores">
+                    {% for item  in colores %}
+                        <a href="{{ BASE_URL }}/store/color/{{ item.id }}/" title="{{item.color}}"><img src="/media/{{item.imagen}}"></a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <img src="{% static "img/temporada.png" %}">
+            
+
+
+        </div>
+
+    <!-- End Side Bar -->
+
+
+    <!-- Thumbnails -->
+
+        <div class="large-8 columns">
+          <div class="row">
+
+          {% for items in productos %}
+
+                <div class="large-4 small-6 producto columns">
+                    <div class="basket">
+                        {% if items.precio != 0.00 %}
+                            <a href="#" rel="{{items.id}}" class="car"><img src="{% static "img/car.png" %}"></a>
+                        {% endif%}
+
+                        <a href="{{ BASE_URL}}/store/product/{{ items.id }}">
+                        {% if items.imagen == '' %}
+                            <img src="{{ BASE_URL}}/static/img/noimage.jpg" class="preview">
+                        {% else %}
+                            <img src="{{ BASE_URL}}/media/{{items.imagen}}" class="preview">
+                        {% endif %}
+                        </a>
+          
+                        <div>
+                          <h5><a href="{{ BASE_URL}}/store/product/{{ items.id }}">{{items.nombre}}</a></h5>
+                          <h6 class="subheader">{% if items.precio != 0.00 %}${{items.precio}}{% else %}Proximamente{% endif %}</h6>
+                          <!-- <a href="#" rel="{{items.id}}" class="button round small">Agregar al carrito</a> -->
+                        </div>
+                    </div>
+                </div>
+
+          {% endfor %}
+
+
+
+
+          </div>
+
+    <!-- End Thumbnails -->
+
+
+  
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+
+
+{% endblock %}

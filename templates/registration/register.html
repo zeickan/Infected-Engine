@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Red Carpet : Registro{% endblock %}
+{% block content %}
+
+
+<div class="row contenido">
+    <div class="large-12 columns">
+
+        <ul class="breadcrumbs">
+          <li><a href="{{ BASE_URL }}">Inicio</a></li>
+          <li><a href="{{ BASE_URL }}/accounts/register/">Registro</a></li>
+          {% if actual %}<li class="current"><a href="#">{{actual}}</a></li>{% endif %}
+        </ul>
+
+      <div class="row">
+        
+        
+
+
+    <!-- Thumbnails -->
+
+        <div class="large-12 columns">
+          <div class="row formula">
+
+            <div class="large-2 columns">&nbsp;</div>
+            
+            <div class="large-8 columns">
+
+                
+                 <h1>Crear cuenta</h1>
+
+                <form action="/accounts/register/" method="post" {% if form.is_multipart %}enctype="multipart/form-data"{% endif %}>
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                        <p class="fieldWrapper">
+                            
+                            {{ field.errors }}
+                            
+                            {{ field.label_tag }} 
+                            
+                            {% if field.html_name == 'password1' %}
+                                <input type="password" name="{{ field.html_name }}" id="{{ field.id_for_label }}" value="" class="texto" >
+                            {% elif  field.html_name == 'password2' %}
+                                <input type="password" name="{{ field.html_name }}" id="{{ field.id_for_label }}" value="" class="texto" >
+                            {% else %}
+                                <input type="text" name="{{ field.html_name }}" id="{{ field.id_for_label }}" value="" class="texto" >
+                            {% endif %}
+
+
+
+                            {{ field.help_text }}
+
+                        </p>
+                    {% endfor %}
+
+                    <p class="fieldWrapper">
+                            
+                            <label for="aviso">Al crear cuenta aceptas nuestro <a href="{{ BASE_URL }}/static/file/AvisoPrivacidad.pdf" target="_blank">Aviso de privacidad</a></label> 
+
+                            <input type="checkbox" name="aviso" id="aviso" value="1"> <small>He leido y acepto el aviso de privacidad</small> 
+
+                    </p>
+
+                    <input type="submit" class="boton" value="Crear cuenta">
+                </form>
+
+
+
+            </div>
+
+            <div class="large-2 columns">&nbsp;</div>
+
+          </div>
+
+    <!-- End Thumbnails -->
+
+
+  
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+
+
+{% endblock %}
