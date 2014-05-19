@@ -31,6 +31,6 @@ SITE_URL = settings.SITE_URL
 ### Principal
 def dashboard(request):
 
-    template = "dashboard.html"
+    template = "infected_dashboard.html"
     data = { 'dev': 'Hello World', }
     return render_to_response(template, context_instance=RequestContext(request,data))
