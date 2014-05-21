@@ -154,6 +154,18 @@ def getProductByColor(request,slug=False):
     return render_to_response(template, context_instance=RequestContext(request,data))
 
 
+"""
+2014-05-08 04:59:04
+"""
+
+import datetime
+import time
+
+
+def date(unixtime, format = '%d/%m/%Y %H:%M:%S'):
+    d = datetime.datetime.fromtimestamp(unixtime)
+    return d.strftime(format)
+
 
 # Cesta de pago
 def basket(request,step = False):
@@ -195,6 +207,9 @@ def basket(request,step = False):
                 request.POST["subtotal"] = subtotal
                 request.POST["envio"] = 150
                 request.POST["total"] = total
+                request.POST['shipping_text'] = 'Pendiente'
+                request.POST['pub_date'] = date(time.time())
+                
                 formula = ProPedidoForm(request.POST)
                 if formula.is_valid():
                     formula.save()
@@ -230,6 +245,7 @@ def basket(request,step = False):
                 #request.POST['comprador'] = user.id
                 request.POST['fac_pais'] = 'Mexico'
                 request.POST['envio_pais'] = 'Mexico'
+                request.POST['shipping_text'] = 'Pendiente'
         
                 formula = AddressPedidoForm(request.POST,instance=pedido)
                 if formula.is_valid():
@@ -264,6 +280,7 @@ def basket(request,step = False):
                 request.POST['payment_uri'] = 'uri://tpv'
                 request.POST['shipping_id'] = 'IDDEELENVIO'
                 request.POST['shipping_uri'] = 'uri://shipping'
+                request.POST['shipping_text'] = 'Pendiente'
         
                 formula = PaymentPedidoForm(request.POST,instance=pedido)
                 if formula.is_valid():
@@ -314,7 +331,7 @@ def basket(request,step = False):
 
                 if pedido.payment_info == "":
 
-                    conekta.api_key = 'key_jxAf3ExGqrL6yrsv'
+                    conekta.api_key = 'key_vX6y75AAxqTdKsSG'
 
                     total = pedido.total
 
@@ -338,20 +355,20 @@ def basket(request,step = False):
 
                     response = charge.payment_method
 
-                    bar = {}
-
-                    bar['custom'] = customcode
-                    bar['payment'] = pedido.payment
-                    bar['payment_id'] = response['barcode']
-                    bar['payment_uri'] = response['barcode_url']
-                    bar['payment_text'] = response['expiry_date']
-                    bar['payment_info'] = json.dumps(response)
-                    bar['shipping_id'] = '00000'
-                    bar['shipping_uri'] = 'uri://'
+                    pedido.payment_id = response['barcode']
+                    pedido.payment_uri = response['barcode_url']
+                    pedido.payment_text = response['expiry_date']
+                    pedido.payment_info = json.dumps(response)
+                    pedido.shipping_id = '00000'
+                    pedido.shipping_uri = 'uri://'
+                    pedido.save()
             
-                    update = PaymentPedidoForm(bar,instance=pedido)
+                    """
+                    update = PaymentPedidoForm(instance=pedido)
                     if update.is_valid():
                         update.save()
+                        return HttpResponseRedirect('/store/checkout/customer/?custom='+customcode)
+                    """
 
                 else :
 
@@ -443,41 +460,12 @@ def register(request):
             form = ExtendedUserCreationForm(request.POST)
             if form.is_valid():
                 new_user = form.save()
-                #send email 
-                notify_email()
                 return HttpResponseRedirect("/accounts/profile/registerSuccess")
         else:
             form = ExtendedUserCreationForm()
 
         return render(request, "registration/register.html", { 'form': form, })
 
-"""
-Put in settings.py
-
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'contacto@redcarpetmanicure.com.mx'
-EMAIL_HOST_PASSWORD = 'R3dC4Rp3To='
-DEFAULT_FROM_EMAIL = 'contacto@redcarpetmanicure.com.mx'
-DEFAULT_TO_EMAIL = 'zeickan@gmail.com'
-
-"""
-
-from django.conf import settings
-from django.core.mail import send_mail
-
-
-def notify_email():
-
-    mail_title = 'Gracias por registrarte'
-    message = 'Gracias por registrarte en Red Carpet Manicure' 
-    email = settings.DEFAULT_FROM_EMAIL
-    recipients = [settings.DEFAULT_TO_EMAIL]
-    
-    send = send_mail(mail_title, message, settings.EMAIL_HOST_USER, ['zeickan@gmail.com'], fail_silently=False)
-
-    return send
 
 
 
