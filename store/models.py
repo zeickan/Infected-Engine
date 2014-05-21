@@ -105,6 +105,67 @@ class Producto(models.Model):
     def dig_colores(self):
         return ', '.join([obj.color for obj in self.colores.all()])
 
+
+
+
+CONVERSOR_CHOICES = (
+    ('1', 'New'),
+    ('2', 'Used'),
+    ('3', 'refurbished'),
+)
+
+class Product(models.Model):
+
+    name = models.CharField(blank=False, max_length=180)
+    pub_date = models.DateTimeField('date published',null=True,blank=True)
+    reference = models.CharField(blank=True,null=True,max_length=60)
+    barcode = models.CharField(blank=True,null=True,max_length=60)
+    description = HTMLField()
+    category = models.ForeignKey(Categoria)
+    image = models.FileField(blank=True,upload_to='documents/%Y/%m/%d')
+    condition = models.CharField(max_length=1,choices=CONVERSOR_CHOICES,default='1')
+   
+    price = models.DecimalField(blank=True,null=True,max_digits=10, decimal_places=2,default='0.00')
+    stock = models.BooleanField(blank=True,default=True,help_text='Desmarcar si no hay stock disponible')
+    active = models.BooleanField(blank=True,default=True,help_text="Marcar como producto activo")
+    show_price = models.BooleanField(blank=True,default=True,help_text="Ver precio del producto en lista")
+
+    #colores = models.ManyToManyField(Colores,blank=True,null=True)
+    #ventaja = HTMLField(blank=True,null=True)
+    #ficha = models.TextField(blank=True,null=True)
+
+
+    def get_colors(self):
+        return self.colores_set.all()
+
+    def __unicode__(self):
+        return "%s" % self.nombre
+
+    def dig_colores(self):
+        return ', '.join([obj.color for obj in self.colores.all()])
+
+class MetaProducto(models.Model):
+    product = models.ForeignKey(Product)
+    name = models.CharField(blank=True,null=True,max_length=150)
+    value = models.CharField(blank=False,max_length=150)
+
+    class Meta:
+        unique_together = ('name','value')
+        verbose_name = "MetaProducto"
+        verbose_name_plural = "MetaProducto"
+
+    def __unicode__(self):
+        return unicode(self.name)
+
+
+
+
+
+
+
+
+
+
 class Pedido(models.Model):
     comprador = models.CharField(blank=False,max_length=150)
     pub_date = models.DateTimeField('date published',null=True,blank=True)

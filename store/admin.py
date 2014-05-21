@@ -40,7 +40,10 @@ admin.site.register(Subcategoria,SubcategoriaAdmin)
 """
 
 
+
+
 admin.site.register(Colores)
+
 
 class ProductoAdmin(admin.ModelAdmin):
     list_display = ('nombre','categoria','dig_colores')
@@ -49,12 +52,23 @@ class ProductoAdmin(admin.ModelAdmin):
 admin.site.register(Producto,ProductoAdmin)
 
 
+class MetaProductoAdmin(admin.TabularInline):
+	model = MetaProducto
+	extra = 0
+
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('name','category')
+    list_filter = ('category',)
+    inlines = [MetaProductoAdmin,]
+
+admin.site.register(Product,ProductAdmin)
+
+
+
 class PedidoAdmin(admin.ModelAdmin):
     list_display = ('fac_nombre','pub_date','total','payment','shipping_text','paid')
     search_fields = ('custom',)
     list_filter  = ('payment','shipping_text','paid')
-
-
     #readonly_fields = ('fac_nombre', )     
     #def fac_nombre(self, obj):
     #    return obj.get_full_name()
