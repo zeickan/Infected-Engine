@@ -52,16 +52,47 @@ class ProductoAdmin(admin.ModelAdmin):
 admin.site.register(Producto,ProductoAdmin)
 
 
-class MetaProductoAdmin(admin.TabularInline):
-	model = MetaProducto
+#### Admin
+
+class CategoriesAdmin(admin.ModelAdmin):
+    list_display = ('name','slug')
+    prepopulated_fields = {"slug": ("name",)}
+    search_fields = ('name',)
+admin.site.register(Categories,CategoriesAdmin)
+
+
+
+class MetaProductAdmin(admin.TabularInline):
+	model = MetaProduct
+	extra = 0
+
+
+class ImagesProductAdmin(admin.TabularInline):
+	model = ImagesProduct
 	extra = 0
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name','category')
     list_filter = ('category',)
-    inlines = [MetaProductoAdmin,]
+    prepopulated_fields = {"slug": ("name",)}
+    inlines = [MetaProductAdmin,ImagesProductAdmin,]
 
 admin.site.register(Product,ProductAdmin)
+
+
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('customer_name','pub_date','total','payment','shipping_info','paid')
+    search_fields = ('custom',)
+    list_filter  = ('payment','shipping_info','paid')
+    #readonly_fields = ('fac_nombre', )     
+    #def fac_nombre(self, obj):
+    #    return obj.get_full_name()
+    #fac_nombre.short_description = 'my custom label'
+
+admin.site.register(Order,OrderAdmin)
+
+
+
 
 
 

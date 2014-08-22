@@ -106,9 +106,61 @@ class Producto(models.Model):
         return ', '.join([obj.color for obj in self.colores.all()])
 
 
+"""
+### Infected Models
+"""
+
+class Categories(models.Model):
+    name = models.CharField(blank=False, max_length=200)
+    slug = models.SlugField()
+    parent = models.ForeignKey('self', blank=True, null=True, related_name='child')
+    active = models.BooleanField(default=True,help_text="Active category")
+
+    class Meta:
+        verbose_name = "Categories"
+        verbose_name_plural = "Categories"
+
+    class Admin:
+        list_display = ('name', '_parents_repr')
+
+    def __unicode__(self):
+        p_list = self._recurse_for_parents(self)
+        p_list.append(self.name)
+        return self.get_separator().join(p_list)
+
+    def get_absolute_url(self):
+        if self.parent_id:
+            return "/tag/%s/%s/" % (self.parent.slug, self.slug)
+        else:
+            return "/tag/%s/" % (self.slug)
+
+    def _recurse_for_parents(self, cat_obj):
+        p_list = []
+        if cat_obj.parent_id:
+            p = cat_obj.parent
+            p_list.append(p.name)
+            more = self._recurse_for_parents(p)
+            p_list.extend(more)
+        if cat_obj == self and p_list:
+            p_list.reverse()
+        return p_list
+
+    def get_separator(self):
+        return ' :: '
+
+    def _parents_repr(self):
+        p_list = self._recurse_for_parents(self)
+        return self.get_separator().join(p_list)
+    _parents_repr.short_description = "Tag parents"
+
+    def save(self):
+        p_list = self._recurse_for_parents(self)
+        if self.name in p_list:
+            raise ValidationError("You must not save a category in itself!")
+        super(Categoria, self).save()
 
 
-CONVERSOR_CHOICES = (
+CONDITIONS = (
     ('1', 'New'),
     ('2', 'Used'),
     ('3', 'refurbished'),
@@ -118,13 +170,13 @@ class Product(models.Model):
 
     name = models.CharField(blank=False, max_length=180)
     pub_date = models.DateTimeField('date published',null=True,blank=True)
+    slug = models.SlugField()
     reference = models.CharField(blank=True,null=True,max_length=60)
     barcode = models.CharField(blank=True,null=True,max_length=60)
     description = HTMLField()
-    category = models.ForeignKey(Categoria)
-    image = models.FileField(blank=True,upload_to='documents/%Y/%m/%d')
-    condition = models.CharField(max_length=1,choices=CONVERSOR_CHOICES,default='1')
-   
+    category = models.ForeignKey(Categories)
+    image = models.FileField(blank=True,upload_to='images/%Y/%m/%d')
+    condition = models.CharField(max_length=1,choices=CONDITIONS,default='1')
     price = models.DecimalField(blank=True,null=True,max_digits=10, decimal_places=2,default='0.00')
     stock = models.BooleanField(blank=True,default=True,help_text='Desmarcar si no hay stock disponible')
     active = models.BooleanField(blank=True,default=True,help_text="Marcar como producto activo")
@@ -134,31 +186,118 @@ class Product(models.Model):
     #ventaja = HTMLField(blank=True,null=True)
     #ficha = models.TextField(blank=True,null=True)
 
-
-    def get_colors(self):
-        return self.colores_set.all()
+    #def get_colors(self):
+    #    return self.colores_set.all()
 
     def __unicode__(self):
-        return "%s" % self.nombre
+        p_list = self._recurse_for_parents(self)
+        p_list.append(self.name)
+        return self.get_separator().join(p_list)
 
-    def dig_colores(self):
-        return ', '.join([obj.color for obj in self.colores.all()])
+    def get_absolute_url(self):
+        if self.parent_id:
+            return "/tag/%s/%s/" % (self.parent.slug, self.slug)
+        else:
+            return "/tag/%s/" % (self.slug)
 
-class MetaProducto(models.Model):
+    #def dig_colores(self):
+    #    return ', '.join([obj.color for obj in self.colores.all()])
+
+class MetaProduct(models.Model):
     product = models.ForeignKey(Product)
     name = models.CharField(blank=True,null=True,max_length=150)
     value = models.CharField(blank=False,max_length=150)
 
     class Meta:
-        unique_together = ('name','value')
-        verbose_name = "MetaProducto"
-        verbose_name_plural = "MetaProducto"
+        #unique_together = ('name','value')
+        verbose_name = "Details"
+        verbose_name_plural = "Details"
+
+    def __unicode__(self):
+        return unicode(self.name)
+
+class ImagesProduct(models.Model):
+    product = models.ForeignKey(Product)
+    name = models.CharField(blank=True,null=True,max_length=150)
+    image = models.FileField(blank=True,upload_to='images/%Y/%m/%d')
+
+    class Meta:
+        #unique_together = ('name','image')
+        verbose_name = "Extra image"
+        verbose_name_plural = "Extra images"
 
     def __unicode__(self):
         return unicode(self.name)
 
 
 
+class Order(models.Model):
+
+    customer = models.CharField(blank=False,max_length=150)
+    customer_name = models.CharField(blank=True,null=True,max_length=100)
+    pub_date = models.DateTimeField('date published',null=True,blank=True)
+
+    products = models.ManyToManyField(Product,blank=True,null=True)
+    subtotal = models.CharField(blank=True,null=True,max_length=50)
+    tax = models.CharField(blank=True,null=True,max_length=50)
+    total = models.CharField(blank=True,null=True,max_length=50)
+    
+    paid = models.BooleanField(blank=False,default=False)
+    custom = models.CharField(blank=True,null=True,max_length=150)
+    coupon = models.CharField(blank=True,null=True,max_length=50)
+    status = models.CharField(blank=True,null=True,max_length=50)
+
+    shipping = models.CharField(blank=True,null=True,max_length=50)
+    shipping_id = models.CharField(blank=True,null=True,max_length=255)
+    shipping_uri = models.CharField(blank=True,null=True,max_length=255)
+    shipping_text = models.CharField(blank=True,null=True,max_length=255)
+    shipping_info = models.CharField(blank=True,null=True,max_length=255)
+
+    shipping_cost = models.CharField(blank=True,null=True,max_length=50)
+    shipping_date = models.DateTimeField('date published',null=True,blank=True)
+    shipping_type = models.CharField(blank=True,null=True,max_length=50)
+    shipping_carrier = models.CharField(blank=True,null=True,max_length=50)
+    shipping_cost = models.CharField(blank=True,null=True,max_length=50)
+    shipping_tracking = models.CharField(blank=True,null=True,max_length=50)
+
+    shipping_name = models.CharField(blank=True,null=True,max_length=250)
+    shipping_street = models.CharField(blank=True,null=True,max_length=250)
+    shipping_suburb = models.CharField(blank=True,null=True,max_length=250)
+    shipping_zipcode = models.CharField(blank=True,null=True,max_length=5)
+    shipping_city = models.CharField(blank=True,null=True,max_length=100)
+    shipping_state = models.CharField(blank=True,null=True,max_length=100)
+    shipping_country = models.CharField(blank=True,null=True,max_length=100)
+    shipping_phone = models.CharField(blank=True,null=True,max_length=50)
+
+    payment = models.CharField(blank=True,null=True,max_length=50)
+    payment_id = models.CharField(blank=True,null=True,max_length=255)
+    payment_uri = models.CharField(blank=True,null=True,max_length=255)
+    payment_text = models.CharField(blank=True,null=True,max_length=255)
+    payment_info = models.CharField(blank=True,null=True,max_length=255)
+
+    payment_type = models.CharField(blank=True,null=True,max_length=50)
+    payment_method = models.CharField(blank=True,null=True,max_length=50)
+    payment_amount = models.CharField(blank=True,null=True,max_length=50)
+    payment_date = models.DateTimeField('date published',null=True,blank=True)
+    payment_invoice = models.FileField(blank=True,upload_to='images/%Y/%m/%d')
+
+    invoice_name = models.CharField(blank=True,null=True,max_length=200)
+    invoice_street = models.CharField(blank=True,null=True,max_length=250)
+    invoice_suburb = models.CharField(blank=True,null=True,max_length=250)
+    invoice_zipcode = models.CharField(blank=True,null=True,max_length=5)
+    invoice_city = models.CharField(blank=True,null=True,max_length=100)
+    invoice_state = models.CharField(blank=True,null=True,max_length=100)
+    invoice_country = models.CharField(blank=True,null=True,max_length=100)
+    invoice_phone = models.CharField(blank=True,null=True,max_length=50)
+    
+
+    class Meta:
+        #unique_together = ('name','image')
+        verbose_name = "Order"
+        verbose_name_plural = "Orders"
+
+    def __unicode__(self):
+        return "%s" % self.comprador
 
 
 
