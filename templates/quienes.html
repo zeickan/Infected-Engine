@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}:: Quienes somos{% endblock%}
+{% load staticfiles %}
+{% block flex %}
+    <li><img class="fright" src="{% static "images/" %}slider-img/slide2.jpg" alt="">
+        <div class="owl-flex-caption-left" style="background:#0064A1 !important;">
+          <div class="owl-flex-bg">
+            <div class="owl-flex-border-1">
+              <div class="owl-slide-text-2 uppertext"><span class="full-text32">Quiénes somos</span></div>
+            </div>
+          </div>
+        </div>
+    </li>
+{% endblock %}
+{% block content %}
+
+	
+<div class="columns sixteen">
+        <h3 class="title ident-top-5 ident-bot-5"> <span>Quienes somos</span> </h3>
+        <dl class="faq_list">
+          <dt> <span class="marker"></span>
+            <p>
+                Ediciones y Agendas Corporativas, S.A. de C.V.” es líder en México en impresión, encuadernación y fabricación de  productos promocionales de alta calidad y es además innovador en productos especiales. <br><br>
+
+Mas de 60 años de experiencia nos respaldan en el mercado editorial de artes gráficas y encuadernación industrial y artesanal.<br><br>
+
+Nuestros diferentes productos son  producidos en México, con las más altas normas de calidad internacional.<br><br>
+
+Nuestras instalaciones son reconocidas como una de las mejores encuadernadoras a nivel Latinoamérica y con nuestro nuevo tren de encuadernación competimos a nivel Mundial. <br><br>
+
+Ediciones y Agendas Corporativas S. A de C. V.  es miembro del grupo de “PAAGSA” la empresa encuadernadora de mayor tradición y reconocimiento por calidad y puntualidad en México.  <br><br>
+
+PAAGSA, fue fundada hace más de 70 años y ahora dirigida con gran éxito, presumimos de ser la mejor empresa de acabados en México.
+
+
+            </p>
+          </dt>
+          
+        </dl>
+      </div>
+
+{% include "slider.html" %}
+{% endblock %}

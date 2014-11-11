@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}:: Servicios{% endblock%}
+{% load staticfiles %}
+{% block flex %}
+    <li><img class="fright" src="{% static "images/" %}slider-img/slide4.jpg" alt="">
+        <div class="owl-flex-caption-left" style="background:#0064A1 !important;">
+          <div class="owl-flex-bg">
+            <div class="owl-flex-border-1">
+              <div class="owl-slide-text-2 uppertext"><span class="full-text32">Servicios</span></div>
+            </div>
+          </div>
+        </div>
+    </li>
+{% endblock %}
+{% block content %}
+
+	 <div class="columns sixteen">
+        <h3 class="title ident-top-5 ident-bot-5"> <span>Servicios</span> </h3>
+        <dl class="faq_list">
+          <dt> <span class="marker"></span>
+            <p>
+                
+               IMPRESIÓN<br><br>
+
+Contamos con 3 tecnologías para impresos de primer nivel <br>
+<ul>
+<li>Digital: poca cantidad alta calidad </li>
+<li>Offset en hoja: tiros medianos de alta calidad </li>
+<li>Offset en rotativa: grandes de alta calidad
+    <ul><li>PREPRENSA  </li>              <li>OFFSET   </li>             <li>DIGITAL</li></ul></li>
+<li>Contamos con equipo de diseñadores especializados en prensa para garantizar una impresión profesional</li>
+</ul>
+
+EDICIÓN<br><br>
+
+Trabajamos sus ideas para que al llegar a las prensas su producto cumpla con los resultados esperados.<br>
+Editamos desde un folleto hasta un libro o cualquier cosa que te imagines.<br><br>
+
+
+ACABADOS<br><br>
+
+Nos esforzamos para que el producto tenga el mejor terminado, suajes, encuadernado y empaques para su entrega.<br><br>
+
+Contamos con la mejor tecnología en encuadernación de libros en rústica y pasta dura, revistas, agendas, biblias, álbumes, catálogos o cualquier producto relacionado con las artes gráficas.<br><br>
+
+
+ESPECIALES<br><br>
+
+Personalizamos tu idea, creando el producto conforme a las necesidades y gustos del cliente desde: libros, agendas, folletos hasta estuches.<br><br>
+
+Escoge el material de tapas, papel, fuentes, acabado y empaque de entrega.<br><br>
+
+ 
+
+
+                <br>
+
+            </p>
+          </dt>
+          
+        </dl>
+      </div>
+
+{% include "slider.html" %}
+{% endblock %}

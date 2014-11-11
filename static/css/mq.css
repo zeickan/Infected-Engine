@@ -1,0 +1,309 @@
+
+ @media only screen and (min-width: 768px) and (max-width: 959px) {
+.bodywrapper {
+background: #fff;
+box-shadow: 0 0 0 rgba(0, 0, 0, 0.0);
+width: 100%;
+margin: 0 auto;
+}
+/* Service Box */
+.features ul li ul li {
+width: 224px;
+}
+.features-inner ul li ul li {
+width: 214px;
+}
+.product-inner ul li li {
+width: 236px;
+}
+ ul.left-tab-links a {
+font-size: 12px;
+}
+.ui-slider-tabs-content-container img {
+display: none;
+}
+
+/* Notificition */
+.notify {
+width: 748px;
+}
+.notify h2 {
+line-height: 26px;
+width: 273px;
+}
+.notify strong {
+display:none;
+}
+ #callout > strong {
+ font-size: 23px;
+ position: relative;
+ top: 14px;
+ width: 546px;
+}
+#callout > span {
+ font-size: 18px;
+ padding: 39px 0 38px;
+ width: 165px;
+}
+
+
+/* Quotes */
+.quotes {
+width:460px;
+}
+.search-ft {
+width:200px;
+}
+#search-ft input {
+ width: 90px;
+}
+.teamwrap-img img {
+border: 0px solid #EEEEEE;
+box-shadow: 0 0 0 #EEEEEE;
+left: 0;
+max-width: 100%;
+padding: 0;
+position: relative;
+top: 0;
+width: auto;
+}
+/*  Blog Video */
+.sidebar-blog-video iframe {
+width: 498px;
+height: 269px;
+}
+}
+@media only screen and (max-width: 767px) {
+.bodywrapper {
+background: #fff;
+box-shadow: 0 0 0 rgba(0, 0, 0, 0.0);
+width: 100%;
+margin: 0 auto;
+}
+ nav {
+float:none;
+background:none;
+}
+ .login {
+display:none;
+}
+#filters {
+ display: inline-block;
+ margin-bottom: 30px;
+ position: relative;
+}
+#filters ul li {
+float: left;
+margin-bottom: 8px;
+}
+ #searchForm fieldset {
+width: 100px;
+}
+ div.input {
+width: 70px !important;
+}
+ .block-ident-1 {
+padding-right:0;
+}
+ .sidebar {
+padding-left: 0;
+}
+.sidebar-ident-right {
+ display: block;
+ padding-left: 0;
+}
+/* Service Box */
+.features ul li ul li {
+margin: 0 0 10px 0;
+width: 200px;
+}
+.features ul .last {
+margin: 0 0 20px 0;
+}
+.features-inner ul li ul li {
+margin: 0 0 10px 0;
+width: 278px;
+}
+ ul.left-tab-links a {
+font-size: 11px;
+padding: 0 7px;
+}
+ul.left-tab-links a i {
+display: none;
+}
+ .ui-slider-tabs-content-container img {
+display: none;
+}
+
+/* Notificition */
+.notify {
+width: 297px;
+margin: 0 0 20px;
+}
+.notify {
+text-align: center;
+}
+.notify .icon-nf {
+display: none;
+}
+.notify-wrapper {
+display: inline-block;
+float: none;
+margin: 0;
+}
+.notify h2 {
+width: 240px;
+margin: 0 30px 20px;
+text-align: center;
+}
+.notify span {
+float: none;
+}
+a.button-demo:, a.button-demo:visited, a.button-buy:, a.button-buy:visited {
+font: 12px 'Open Sans';
+font-weight: 300;
+}
+.notify em {
+font-size: 17px;
+line-height: 27px;
+padding: 0 0;
+}
+ #callout > strong {
+ font-size: 14px;
+ padding-left: 20px;
+ position: relative;
+ top: 11px;
+ width: 200px;
+}
+#callout > span {
+ font-size: 14px;
+ padding: 34px 0 34px;
+ width: 73px;
+}
+
+/*Quotes & Search*/
+.search {
+width:270px;
+padding:10px 0 0 0px;
+}
+.search-ft {
+width: 229px;
+}
+#search-ft input {
+width: 102px;
+}
+.quotes {
+width:270px;
+border:none;
+height:110px;
+}
+.quotes blockquote {
+padding:0 20px 0 64px;
+}
+.teamwrap-img img {
+border: 0px solid #EEEEEE;
+box-shadow: 0 0 0 #EEEEEE;
+left: 0;
+max-width: 100%;
+padding: 0;
+position: relative;
+top: 0;
+width: auto;
+}
+/*  Blog Video */
+.sidebar-blog-video iframe {
+width: 290px;
+height: 160px;
+}
+
+/* back to top button */
+#toTop {
+display:none !important;
+}
+}
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+ .bodywrapper {
+background: #fff;
+box-shadow: 0 0 0 rgba(0, 0, 0, 0.0);
+width: 100%;
+margin: 0 auto;
+}
+
+/* Service Box */
+.features ul li ul li {
+margin: 0 0 10px 0;
+width: 408px;
+}
+.features ul .last {
+margin: 0 0 20px 0;
+}
+.features-inner ul li ul li {
+margin: 0 0 10px 0;
+width: 398px;
+}
+.product-inner ul li li {
+margin: 0 0 10px 0;
+width: 378px;
+}
+ #filters {
+ display: inline-block;
+ margin-bottom: 30px;
+ position: relative;
+}
+#filters ul li {
+float: left;
+}
+
+/* Notificition */
+.notify {
+width: 417px;
+margin: 0 0 20px;
+}
+.notify h2 {
+width: 360px;
+}
+ #callout > strong {
+ font-size: 18px;
+ padding-left: 20px;
+ position: relative;
+ top: 12px;
+ width: 282px;
+}
+#callout > span {
+ font-size: 15px;
+ padding: 41px 0 42px;
+ width: 111px;
+}
+
+/*Quotes & Search*/
+.search-ft {
+width: 335px;
+}
+#search-ft input {
+width: 223px;
+}
+.quotes {
+width:370px;
+height:80px;
+}
+.search {
+width:370px;
+}
+.teamwrap-img img {
+border: 0px solid #EEEEEE;
+box-shadow: 0 0 0 #EEEEEE;
+left: 0;
+max-width: 100%;
+padding: 0;
+position: relative;
+top: 0;
+width: auto;
+}
+/*  Blog Video */
+.sidebar-blog-video iframe {
+width: 410px;
+height: 243px;
+}
+}
+
+

@@ -38,6 +38,40 @@ def principal(request):
     return render_to_response(template, context_instance=RequestContext(request,data))
 
 
+def seccion(request,slug = False):
+
+    if slug == "quienes":
+        template = "quienes.html"
+        data = {'dev':'dev',"actual": 'videos',}
+    elif slug == "tecnologia":
+        template = "tecnologia.html"
+        data = {'dev':'dev',"actual": 'FAQ',}
+    elif slug == "servicios":
+        template = "servicios.html"
+        data = {'dev':'dev',"actual": 'SERVICIOS',}
+    elif slug == "clientes":
+        template = "clientes.html"
+        data = {'dev':'dev',"actual": 'CONTACTO',}
+    elif slug == "contacto":
+        template = "contacto.html"
+        data = {'dev':'dev',"actual": 'CONTACTO',}
+    else:
+        template = "off.html"
+        data = {'dev':'dev',"actual": 'Como aplicar',}
+
+
+    return render_to_response(template, context_instance=RequestContext(request,data))
+
+### Principal
+def catalogo(request,slug=False):
+    #categorias = Categoria.objects.all()
+    #productos = Producto.objects.all()
+    template = "productos.html"
+    data = { 'dev': 'Hello World', 'slug':slug, 'title':"Agendas diarias" }
+    return render_to_response(template, context_instance=RequestContext(request,data))
+
+
+
 # Obtenemos los productos
 def getProducts(request,slug=False):
     
@@ -411,22 +445,6 @@ def basket(request,step = False):
         return HttpResponseRedirect("/accounts/login/")
     
     
-
-def seccion(request,slug = False):
-
-    if slug == "videos":
-        template = "videos.html"
-        data = {'dev':'dev',"actual": 'videos',}
-    elif slug == "faq":
-        template = "faq.html"
-        data = {'dev':'dev',"actual": 'FAQ',}
-    else:
-        template = "aplicar.html"
-        data = {'dev':'dev',"actual": 'Como aplicar',}
-
-
-    return render_to_response(template, context_instance=RequestContext(request,data))
-
 
 
 

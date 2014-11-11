@@ -12,11 +12,15 @@ admin.autodiscover()
 
 
 urlpatterns = patterns('',
-    # Examples:
+    
     url(r'^$', 'store.views.principal', name='home'),
 
+    url(r'^secc/(?P<slug>\w{0,50})/$', 'store.views.seccion', name='seccion'),
+    url(r'^productos/$', 'store.views.catalogo', name='catalogo'),
+    url(r'^productos/(?P<slug>\w{0,50})/$', 'store.views.catalogo', name='catalogo'),
+
     # Panel de control Store
-    (r'^panel/', include('panel.urls')),
+    #(r'^panel/', include('panel.urls')),
 
     # Store
     #url(r'^store/$', 'store.views.getProducts', name='store_getProducts'),
@@ -33,26 +37,26 @@ urlpatterns = patterns('',
     #url(r'^seccion/(?P<slug>[-\w]+)/$', 'store.views.seccion', name='seccion'),
     
     # API STORE    
-    url(r'^api/addItem$', 'store.api.setBasket', name='api_additem'),
-    url(r'^api/delItem$', 'store.api.delBasket', name='api_delitem'),
-    url(r'^api/conekta$', 'store.api.conektaio', name='conekta_gateway'),
+    #url(r'^api/addItem$', 'store.api.setBasket', name='api_additem'),
+    #url(r'^api/delItem$', 'store.api.delBasket', name='api_delitem'),
+    #url(r'^api/conekta$', 'store.api.conektaio', name='conekta_gateway'),
     
     
     # AUTH
     
-    (r'^accounts/login/$',  login),
-    (r'^accounts/logout/$', logout),
-    (r'^accounts/',include('userprofile.urls')),
-    url(r'^accounts/register/$', 'store.views.register', name='user_register'),
+    #(r'^accounts/login/$',  login),
+    #(r'^accounts/logout/$', logout),
+    #(r'^accounts/',include('userprofile.urls')),
+    #url(r'^accounts/register/$', 'store.views.register', name='user_register'),
 
     #url(r'^accounts/profile/$', 'userprofile.views.userprofile', name='user_profile'),    
     #url(r'^accounts/login/registerSuccess$','userprofile.views.registersuccess'),
 
     # Basket
     
-    url(r'^basket/$', 'store.views.basket', name='basket'),
-    url(r'^basket/ipn$', 'store.views.ipn', name='ipn'),
-    (r'^basket/request/ipn/notify/', include('paypal.standard.ipn.urls')),
+    #url(r'^basket/$', 'store.views.basket', name='basket'),
+    #url(r'^basket/ipn$', 'store.views.ipn', name='ipn'),
+    #(r'^basket/request/ipn/notify/', include('paypal.standard.ipn.urls')),
     
 
     #url(r'^payment\.html$', 'store.views.payment', name='payment'),

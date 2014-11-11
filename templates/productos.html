@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% block title %}:: Productos{% endblock%}
+{% load staticfiles %}
+{% block flex %}
+    <li><img class="fright" src="{% static "images/" %}slider-img/slide7.jpg" alt="">
+        <div class="owl-flex-caption-left" style="background:#0064A1 !important;">
+          <div class="owl-flex-bg">
+            <div class="owl-flex-border-1">
+              <div class="owl-slide-text-2 uppertext"><span class="full-text32">PRODUCTOS</span></div>
+            </div>
+          </div>
+        </div>
+    </li>
+{% endblock %}
+{% block content %}
+    
+    {% if slug == False %}
+	
+    <!-- Productos -->
+        <div class="productos">
+            <!-- Image and text -->
+            <div class="sixteen columns">
+              <h3 class="title ident-bot-5"> <span>PRODUCTOS DESTACADOS</span> </h3>
+            </div>
+            
+            <!-- PRODUCTS -->
+
+            <div class="four columns"> 
+                <div class="producto">
+                    <a href="/productos/diarias/"><img alt="" src="{% static "images/" %}productos/1.png"></a>
+                </div>
+            </div>
+            
+
+            <div class="four columns"> 
+                <div class="producto">
+                    <a href="/productos/escritorio/"><img alt="" src="{% static "images/" %}productos/2.png"></a>
+                </div>
+            </div>
+
+            <div class="four columns"> 
+                <div class="producto">
+                    <a href="/productos/presidencial/"><img alt="" src="{% static "images/" %}productos/3.png"></a>
+                </div>
+            </div>
+
+            <div class="four columns"> 
+                <div class="producto">
+                    <a href="/productos/cuadernos/"><img alt="" src="{% static "images/" %}productos/4.png"></a>
+                </div>
+            </div>
+            <div class="clear spacehr"></div>
+            
+            <div class="four columns"> 
+                <div class="producto">
+                    <a href="/productos/personalizados/"><img alt="" src="{% static "images/" %}productos/5.png"></a>
+                </div>
+            </div>
+            
+
+
+            <div class="clear spacehr"></div>
+            
+
+            
+
+        </div>
+        <!-- Productos End -->
+    {% else %}
+        
+        <!-- Productos -->
+        <div class="productos">
+            <!-- Image and text -->
+            <div class="sixteen columns">
+              <h3 class="title ident-bot-5"> <span>{{ title }}</span> </h3>
+            </div>
+            
+            <!-- PRODUCTS -->
+
+            <div class="seven columns"> 
+                <div class="producto">
+                    <img id="zoom_03" src="{% static "productos/" %}1-1full.png" data-zoom-image="{% static "productos/" %}1-1full.png" width="100%"/> 
+
+                    <div id="gallery_01"> 
+
+                        <a href="#" data-image="{% static "productos/" %}1-1full.png" data-zoom-image="{% static "productos/" %}1-1full.png"> 
+                            <img id="zoom_03" src="{% static "productos/" %}1-1.png" /> 
+                        </a> 
+
+                        <a href="#" data-image="{% static "productos/" %}1-2full.png" data-zoom-image="{% static "productos/" %}1-2full.png"> 
+                            <img id="zoom_03" src="{% static "productos/" %}1-2.png" /> 
+                        </a> 
+
+                        <a href="#" data-image="{% static "productos/" %}1-3full.png" data-zoom-image="{% static "productos/" %}1-3full.png"> 
+                            <img id="zoom_03" src="{% static "productos/" %}1-3.png" /> 
+                        </a> 
+
+                        <a href="#" data-image="{% static "productos/" %}1-4full.png" data-zoom-image="{% static "productos/" %}1-4full.png"> 
+                            <img id="zoom_03" src="{% static "productos/" %}1-4.png" /> 
+                        </a> 
+
+
+                    </div>
+
+                    
+
+                </div>
+            </div>
+            
+
+            <div class="nine columns"> 
+                <h3>AGENDA DIARIA </h3>
+                
+                <ul>
+                    <li>Tamaño: 15 x 22.5 cm.</li>
+                    <li>Papel: Crema inglés 75gr. ó Kronos alta blancura de 60grs.</li>
+                    <li>Impresión de agenda: 2 x 2 tintas. (gris y azul)</li>
+                    <li>Número de Páginas: 352 (directorio telefónico incluido)</li>
+                    <li>Cantos: Con ó sin cantos (dorado ó plateado).</li>
+                    <li>Directorio telefónico: Incluido en el cuerpo de la agenda</li>
+                    <li>Material de portada: Poliuretano termosensible  (importado)</li>
+                    <li>Grabado en la portada: Año (logo de la empresa a partir de 50pzs. Es gratis) </li>
+                    <li>Publicidad del cliente: (opcional)</li>
+                </ul>
+                
+                <p>
+                    <strong>Gris / Rojo </strong>
+                    • Papel Blanco de 75 grs.
+                    • Sin Cantos
+                </p>
+
+                <p>
+                    <strong>Miel / Café</strong>
+                    • Papel Crema de 80 grs.
+                    • Sin Cantos
+                </p>
+
+                <p>
+                    <strong>Vino con perforación plata</strong>
+                    • Papel Blanco de 75 grs.
+                    • Sin Cantos
+                </p>
+
+                <p>
+                    <strong>Negro / Miel </strong>
+                    • Papel Crema Inglés de 80 grs.
+                    • Sin Cantos
+                </p>
+
+            </div>
+
+
+            
+
+
+            <div class="clear spacehr"></div>
+            
+
+            
+
+        </div>
+        <!-- Productos End -->
+
+    {% endif %}
+{% include "slider.html" %}
+{% endblock %}

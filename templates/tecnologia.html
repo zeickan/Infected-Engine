@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}:: Tecnología{% endblock%}
+{% load staticfiles %}
+{% block flex %}
+    <li><img class="fright" src="{% static "images/" %}slider-img/slide3.jpg" alt="">
+        <div class="owl-flex-caption-left" style="background:#0064A1 !important;">
+          <div class="owl-flex-bg">
+            <div class="owl-flex-border-1">
+              <div class="owl-slide-text-2 uppertext"><span class="full-text32">TECNOLOGÍA</span></div>
+            </div>
+          </div>
+        </div>
+    </li>
+{% endblock %}
+{% block content %}
+
+	
+<div class="columns sixteen">
+        <h3 class="title ident-top-5 ident-bot-5"> <span>Tecnología</span> </h3>
+        <dl class="faq_list">
+          <dt> <span class="marker"></span>
+            <p>
+                
+                CONTAMOS CON LAS SIGUIENTES MAQUINARIAS PARA NUESTROS PROCESOS<br><br>
+
+IMPRESIÓN:<br><br>
+<ul>
+<li>KBA 6 colores con Barniz en línea formato 105x72.</li>
+<li>2 Heidelberg de 5 colores más Barniz en línea formato 102x71.</li>
+<li>Heidelberg de 4 colores formato 102x71.</li>
+<li>2 Heidelberg de 2 colores formatos 102x71.</li>
+</ul>
+
+ENCUADERNACIÓN:<br><br>
+
+<ul>
+<li>Alzadora automática (KOLBUS)</li>
+<li>4 maquinas de costura automática (1 ASTROMIC Y 3 INVENTAS)</li>
+<li>2 maquinas de hacer carteras (KOLBUS)</li>
+<li>Doradora automática (KOLBUS Y 4 MANUALES)</li>
+<li>Tren KOLBUS de pasta dura con capacidad de 10,000 ejemplares/turno</li>
+<li>Forradora de rustica (PONY RB5)</li>
+<li>Maquinas periféricas varias</li>
+<li>(2 CORTADORAS DE CARTON, 6 GUILLOTINAS, 1 CORTADORA DE TELA, 3 MAQUINAS DE COSTURA MANUAL 5 PRENSAS ETC.)</li>
+</ul>
+
+
+ACABADOS:<br><br>
+
+<ul>
+<li>3 Guillotinas POLAR.</li>
+<li>3 Dobladoras MBO y Stahl.</li>
+<li>3 Suajadoras Heidelberg.</li>
+<li>2 Trenes de Encuadernación Müller Martini.</li>
+</ul><br>
+
+            </p>
+          </dt>
+          
+        </dl>
+      </div>
+
+{% include "slider.html" %}
+{% endblock %}
